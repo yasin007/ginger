@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
-# @Time    : 2018/6/12 上午10:37
-# @Author  : 维尼的小熊
-# @FileName: Redprint.py
-# @Software: PyCharm
+"""
+create by 维尼的小熊 on 2018/6/15
+
+"""
+__autor__ = 'yasin'
+
 
 class Redprint:
     def __init__(self, name):
