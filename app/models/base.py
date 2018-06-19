@@ -4,7 +4,7 @@ create by 维尼的小熊 on 2018/6/15
 """
 __autor__ = 'yasin'
 
-# from app.libs.error_code import NotFound
+from app.libs.error_code import NotFound
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy, BaseQuery
 from sqlalchemy import inspect, Column, Integer, SmallInteger, orm
@@ -30,14 +30,14 @@ class Query(BaseQuery):
 
     def get_or_404(self, ident):
         rv = self.get(ident)
-        # if not rv:
-        #     raise NotFound()
+        if not rv:
+            raise NotFound()
         return rv
 
     def first_or_404(self):
         rv = self.first()
-        # if not rv:
-        #     raise NotFound()
+        if not rv:
+            raise NotFound()
         return rv
 
 
