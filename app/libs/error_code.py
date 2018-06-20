@@ -41,14 +41,14 @@ class NotFound(APIException):
     msg = 'the resource are not found O__O...'
     error_code = 1001
 
-
+#没有授权
 class AuthFailed(APIException):
     code = 401
     error_code = 1005
-    msg = 'authorization failed'
+    msg = '没有授权'
 
-
+#禁止访问权限不够
 class Forbidden(APIException):
     code = 403
     error_code = 1004
-    msg = 'forbidden, not in scope'
+    msg = '禁止访问权限不够'
