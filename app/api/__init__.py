@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
-# @Time    : 2018/6/12 上午10:02
-# @Author  : 维尼的小熊
-# @FileName: __init__.py.py
-# @Software: PyCharm
+"""
+create by 维尼的小熊 on 2018/6/15
+
+"""
+__autor__ = 'yasin'

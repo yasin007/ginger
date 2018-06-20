@@ -13,6 +13,11 @@ class Success(APIException):
     error_code = 0
 
 
+class DeleteSuccess(Success):
+    code = 202
+    error_code = 1
+
+
 class ServerError(APIException):
     code = 500
     msg = 'sorry, we made a mistake (*￣︶￣)!'
@@ -20,10 +25,6 @@ class ServerError(APIException):
 
 
 class ClientTypeError(APIException):
-    # 400参数错误 401 403 404
-    # 500 未知错误
-    # 200 成功 201更新成功 204
-    # 301 302
     code = 400
     msg = 'client is invalid'
     error_code = 1006
@@ -33,6 +34,7 @@ class ParameterException(APIException):
     code = 400
     msg = 'invalid'
     error_code = 1000
+
 
 class NotFound(APIException):
     code = 404
@@ -45,8 +47,8 @@ class AuthFailed(APIException):
     error_code = 1005
     msg = 'authorization failed'
 
+
 class Forbidden(APIException):
     code = 403
     error_code = 1004
     msg = 'forbidden, not in scope'
-

@@ -9,12 +9,19 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app.models.base import Base, db
 from app.libs.error_code import NotFound, AuthFailed
 
+
 class User(Base):
     id = Column(Integer, primary_key=True)
     email = Column(String(24), unique=True, nullable=False)
-    nickename = Column(String(24), unique=True)
+    nickname = Column(String(24), unique=True)
     auth = Column(SmallInteger, default=1)
     _password = Column('password', String(100))
+
+    def keys(self):
+        return ['id', 'email', 'nickname', 'auth']
+
+    def __getitem__(self, item):
+        return getattr(self, item)
 
     @property
     def password(self):
@@ -28,7 +35,7 @@ class User(Base):
     def register_by_email(nickname, account, secret):
         with db.auto_commit():
             user = User()
-            user.nickename = nickname
+            user.nickname = nickname
             user.email = account
             user.password = secret
             db.session.add(user)

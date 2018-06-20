@@ -5,12 +5,15 @@ create by 维尼的小熊 on 2018/6/19
 __autor__ = 'yasin'
 
 from collections import namedtuple
+
 from flask import current_app, g, request
 from flask_httpauth import HTTPBasicAuth
 from itsdangerous import TimedJSONWebSignatureSerializer \
     as Serializer, BadSignature, SignatureExpired
+
 from app.libs.error_code import AuthFailed, Forbidden
 from app.libs.scope import is_in_scope
+
 
 auth = HTTPBasicAuth()
 User = namedtuple('User', ['uid', 'ac_type', 'scope'])
@@ -25,7 +28,6 @@ def verify_password(token, password):
     # 123456
     # key=Authorization
     # value =basic base64(qiyue:123456)
-
     user_info = verify_auth_token(token)
     if not user_info:
         return False
