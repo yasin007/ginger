@@ -13,13 +13,8 @@ from app.libs.error_code import DeleteSuccess
 
 api = Redprint('user')
 
-#获取用户id
-@api.route('/<int:uid>', methods=['GET'])
-@auth.login_required
-def super_get_user(uid):
-    user = User.query.filter_by(id=uid).first_or_404()
-    return jsonify(user)
 
+# 获取用户id
 
 @api.route('', methods=['GET'])
 @auth.login_required
@@ -29,12 +24,7 @@ def get_user():
     return jsonify(user)
 
 
-# 管理员
-@api.route('/<int:uid>', methods=['DELETE'])
-def super_delete_user(uid):
-    pass
-
-#删除用户id
+# 删除用户id
 @api.route('', methods=['DELETE'])
 @auth.login_required
 def delete_user():
@@ -43,3 +33,16 @@ def delete_user():
         user = User.query.filter_by(id=uid).first_or_404()
         user.delete()
     return DeleteSuccess()
+
+
+# 管理员
+@api.route('/<int:uid>', methods=['DELETE'])
+def super_delete_user(uid):
+    pass
+
+
+@api.route('/<int:uid>', methods=['GET'])
+@auth.login_required
+def super_get_user(uid):
+    user = User.query.filter_by(id=uid).first_or_404()
+    return jsonify(user)

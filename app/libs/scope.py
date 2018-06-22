@@ -12,9 +12,9 @@ class Scope:
 
     def __add__(self, other):
         self.allow_api = self.allow_api + other.allow_api
+        # 去重
         self.allow_api = list(set(self.allow_api))
         # 运算符重载
-
         self.allow_module = self.allow_module + \
                             other.allow_module
         self.allow_module = list(set(self.allow_module))
@@ -28,6 +28,7 @@ class Scope:
 class AdminScope(Scope):
     # allow_api = ['v1.user+super_get_user',
     #              'v1.user+super_delete_user']
+
     allow_module = ['v1.user']
 
     def __init__(self):
