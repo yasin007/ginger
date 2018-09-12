@@ -8,5 +8,8 @@ from enum import Enum
 
 
 class ClinetTypeEnum(Enum):
+    """
+    客户端登录类型
+    """
     USER_EMAIL = 100
     USER_MOBILE = 101

@@ -8,6 +8,7 @@ from wtforms import Form
 from app.libs.error_code import ParameterException
 from flask import request
 
+
 class BaseForm(Form):
     def __init__(self):
         data = request.json
@@ -17,5 +18,7 @@ class BaseForm(Form):
         valid = super(BaseForm, self).validate()
         if not valid:
             # form errors
-            raise ParameterException(msg=self.errors)
+            errormsg = tuple(self.errors.values())[0][0]
+            raise ParameterException(msg=errormsg)
+
         return self

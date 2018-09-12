@@ -19,36 +19,45 @@ class DeleteSuccess(Success):
 
 
 class ServerError(APIException):
+    """
+    服务器未知错误
+    """
     code = 500
     msg = 'sorry, we made a mistake (*￣︶￣)!'
     error_code = 999
 
 
-class ClientTypeError(APIException):
-    code = 400
-    msg = 'client is invalid'
-    error_code = 1006
-
-
 class ParameterException(APIException):
+    """
+    参数错误
+    """
     code = 400
     msg = 'invalid'
     error_code = 1000
 
 
 class NotFound(APIException):
+    """
+    没有找到资源和界面
+    """
     code = 404
     msg = 'the resource are not found O__O...'
     error_code = 1001
 
-#没有授权
+
 class AuthFailed(APIException):
+    """
+    没有授权
+    """
     code = 401
     error_code = 1005
     msg = '没有授权'
 
-#禁止访问权限不够
+
 class Forbidden(APIException):
+    """
+    禁止访问权限不够
+    """
     code = 403
     error_code = 1004
     msg = '禁止访问权限不够'

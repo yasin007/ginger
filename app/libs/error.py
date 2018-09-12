@@ -9,8 +9,11 @@ from werkzeug.exceptions import HTTPException
 
 
 class APIException(HTTPException):
+    """
+    自定义异常 重写HTTPException
+    """
     code = 500
-    msg = '你好'
+    msg = 'sorry -- error'
     error_code = 999
 
     def __init__(self, msg=None, code=None, error_code=None, headers=None):
@@ -37,6 +40,10 @@ class APIException(HTTPException):
 
     @staticmethod
     def get_url_no_param():
+        """
+        去掉问号后面内容保留主路径
+        :return: 主路径
+        """
         full_path = str(request.full_path)
         main_path = full_path.split('?')
         return main_path[0]

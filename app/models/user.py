@@ -11,11 +11,12 @@ from app.libs.error_code import NotFound, AuthFailed
 
 
 class User(Base):
-    id = Column(Integer, primary_key=True)
-    email = Column(String(24), unique=True, nullable=False)
-    nickname = Column(String(24), unique=True)
-    auth = Column(SmallInteger, default=1)
-    _password = Column('password', String(100))
+    # parmark 建表
+    id = Column(Integer, primary_key=True)  # 主键
+    email = Column(String(24), unique=True, nullable=False)  # 邮箱
+    nickname = Column(String(24), unique=True)  # 昵称
+    auth = Column(SmallInteger, default=1)  # 权限标识
+    _password = Column('password', String(100))  # 密码
 
     def keys(self):
         return ['id', 'email', 'nickname', 'auth']
@@ -23,6 +24,7 @@ class User(Base):
     def __getitem__(self, item):
         return getattr(self, item)
 
+    # parmark 设置密码
     @property
     def password(self):
         return self._password
@@ -31,6 +33,7 @@ class User(Base):
     def password(self, raw):
         self._password = generate_password_hash(raw)
 
+    # parmark 注册入库-邮箱
     @staticmethod
     def register_by_email(nickname, account, secret):
         with db.auto_commit():

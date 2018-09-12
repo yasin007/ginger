@@ -16,13 +16,11 @@ api = Redprint('client')
 @api.route('/register', methods=['POST'])
 def create_client():
     form = ClientForm().validate_for_api()
-    promis = {
+    promise = {
 
         ClinetTypeEnum.USER_EMAIL: __register_user_by_email
     }
-    promis[form.type.data]()
-    # 可预知的异常
-    # 完全没有意识到的异常 未知异常
+    promise[form.type.data]()
     return Success()
 
 

@@ -46,6 +46,9 @@ db = SQLAlchemy(query_class=Query)
 
 
 class Base(db.Model):
+    """
+    模型基类
+    """
     __abstract__ = True
     create_time = Column(Integer)
     status = Column(SmallInteger, default=1)
