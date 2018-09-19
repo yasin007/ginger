@@ -18,6 +18,7 @@ class User(Base):
     auth = Column(SmallInteger, default=1)  # 权限标识
     _password = Column('password', String(100))  # 密码
 
+    # 序列化对象
     def keys(self):
         return ['id', 'email', 'nickname', 'auth']
 
@@ -45,7 +46,7 @@ class User(Base):
 
     @staticmethod
     def verify(email, password):
-        user = User.query.filter_by(email=email).first_or_404()
+        user = User.query.filter_by(email=email).first_or_404('您还没有注册，请先去注册')
         if not user.check_password(password):
             raise AuthFailed()
         scope = 'AdminScope' if user.auth == 2 else 'UserScope'

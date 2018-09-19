@@ -11,6 +11,11 @@ from datetime import date
 
 
 class JSONEncoder(_JSONEncoder):
+    """
+    序列化从model里找相应的序列化key
+    处理时间类型
+    """
+
     def default(self, o):
         if hasattr(o, 'keys') and hasattr(o, '__getitem__'):
             return dict(o)

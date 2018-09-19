@@ -16,6 +16,7 @@ from app.libs.scope import is_in_scope
 auth = HTTPBasicAuth()
 User = namedtuple('User', ['uid', 'ac_type', 'scope'])
 
+
 @auth.verify_password
 def verify_password(token, password):
     # token
@@ -29,6 +30,7 @@ def verify_password(token, password):
     if not user_info:
         return False
     else:
+
         # request
         g.user = user_info
         return True
@@ -39,10 +41,10 @@ def verify_auth_token(token):
     try:
         data = s.loads(token)
     except BadSignature:
-        raise AuthFailed(msg='token is invalid',
+        raise AuthFailed(msg='token不是有合法的',
                          error_code=1002)
     except SignatureExpired:
-        raise AuthFailed(msg='token is expired',
+        raise AuthFailed(msg='token已经过期',
                          error_code=1003)
     uid = data['uid']
     ac_type = data['type']

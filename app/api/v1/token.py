@@ -8,14 +8,15 @@ from app.libs.redprint import Redprint
 from app.validators.forms import ClientForm
 from app.libs.enums import ClinetTypeEnum
 from app.models.user import User
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, SignatureExpired, \
-    BadSignature
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 api = Redprint('token')
 
 
 @api.route('', methods=['POST'])
 def get_token():
+    """登录"""
+
     form = ClientForm().validate_for_api()
 
     promis = {
@@ -25,7 +26,6 @@ def get_token():
     identity = promis[ClinetTypeEnum(form.type.data)](
         form.account.data,
         form.secret.data
-
     )
 
     # Token
@@ -42,7 +42,11 @@ def get_token():
 
 def generate_auth_token(uid, ac_type, scope=None,
                         expiration=7200):
-    """生成令牌"""
+    """
+    生成令牌
+    有效期2小时
+    """
+
     s = Serializer(current_app.config['SECRET_KEY'],
                    expires_in=expiration)
     return s.dumps({

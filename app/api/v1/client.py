@@ -15,6 +15,9 @@ api = Redprint('client')
 
 @api.route('/register', methods=['POST'])
 def create_client():
+    """
+    注册register
+    """
     form = ClientForm().validate_for_api()
     promise = {
 

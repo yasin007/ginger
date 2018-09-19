@@ -14,6 +14,9 @@ class Success(APIException):
 
 
 class DeleteSuccess(Success):
+    """
+    删除成功
+    """
     code = 202
     error_code = 1
 
@@ -61,3 +64,12 @@ class Forbidden(APIException):
     code = 403
     error_code = 1004
     msg = '禁止访问权限不够'
+
+
+class HttpFailed(APIException):
+    """
+    http请求错误
+    """
+    code = 405
+    error_code = 1007
+    msg = 'http错误'

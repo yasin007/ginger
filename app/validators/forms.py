@@ -30,7 +30,6 @@ class ClientForm(BaseForm):
 
         self.type.data = client
 
-
 class UserEmailForm(ClientForm):
     account = StringField(validators=[DataRequired(message='邮箱不允许为空'), Email(message='请填写正确的邮箱')])
     secret = StringField(validators=[
@@ -39,8 +38,7 @@ class UserEmailForm(ClientForm):
         Regexp(r'^[A-Za-z0-9_*&$#@]{6,22}$', message='请输入6位至22位格式密码')
 
     ])
-
-    nickname = StringField(validators=[DataRequired(),
+    nickname = StringField(validators=[DataRequired(message='昵称不允许为空'),
                                        length(min=2, max=22)])
 
     # 验证用户是否注册过

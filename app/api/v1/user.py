@@ -19,7 +19,7 @@ api = Redprint('user')
 @api.route('', methods=['GET'])
 @auth.login_required
 def get_user():
-    uid = g.user.id
+    uid = g.user.uid
     user = User.query.filter_by(id=uid).first_or_404()
     return jsonify(user)
 
@@ -38,7 +38,10 @@ def delete_user():
 # 管理员
 @api.route('/<int:uid>', methods=['DELETE'])
 def super_delete_user(uid):
-    pass
+    with db.auto_commit():
+        user = User.query.filter_by(id=uid).first_or_404()
+        user.delete()
+    return DeleteSuccess()
 
 
 @api.route('/<int:uid>', methods=['GET'])
